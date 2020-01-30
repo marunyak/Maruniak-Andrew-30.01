@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - lts/*
+cache:
+  directories:
+    - node_modules
+branches:
+  only:
+    - master
+script:
+  - npm run lint
+  - npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: build
+  keep_history: true
+  on:
+    branch: master
