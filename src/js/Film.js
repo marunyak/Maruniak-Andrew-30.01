@@ -4,6 +4,7 @@ class Film {
   constructor() {
     this.url = "http://my-json-server.typicode.com/moviedb-tech/movies/list/";
     this.filmList = document.querySelector(".movie-list");
+    this.modal = document.querySelector(".modal");
     this.selectFilter = document.querySelector(".filter-genre");
     this.filter = "";
     this.list = "";
@@ -40,7 +41,9 @@ class Film {
       }
     })
       .then(res => res.json())
-      .then(response => {})
+      .then(response => {
+        this.createFilmModal(response);
+      })
       .catch(error => {
         console.error(error);
         return undefined;
@@ -131,6 +134,54 @@ class Film {
     } else {
       this.renderFilmItems("", type);
     }
+  }
+
+  createFilmModal({
+    id,
+    name,
+    img,
+    description,
+    year,
+    genres,
+    director,
+    starring
+  }) {
+    let genList = "";
+    if (genres) {
+      genres.forEach(function(item) {
+        genList += `<div class="genre-item">${item}</div>`;
+      });
+    }
+    const film = `
+    <div class="modal-content">
+        <div class="modal-left">
+            <img src=${img} alt="">
+            <div class="star-year">
+                <p>starr</p>
+                <p class="modal-movie-name">${year}</p>
+            </div>
+            <div class="generes-list">
+                ${genList}
+            </div>
+        </div>
+        <div class="modal-right">
+            <div class="modal-main-info">
+                <h1>${name}</h1>
+                <p>${description}</p>
+            </div>
+            <div class="modal-movie-cast">
+                <p class="modal-movie-director">Director: ${director}</p>
+                <p class="modal-movie-starring">Starring: ${starring.join(
+                  ","
+                )}</p>
+            </div>
+        </div>
+        <span class="close-button">
+            X
+        </span>
+    </div>`;
+    this.modal.classList.add("active");
+    this.modal.innerHTML += film;
   }
 }
 
