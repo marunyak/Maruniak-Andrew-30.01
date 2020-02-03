@@ -1,0 +1,378 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+img {
+    max-width: 100%;
+}
+
+main {
+    display: flex;
+}
+
+h1 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: center;
+    color: #ff5200;
+}
+
+/* FILTER */
+
+.movie-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+select.filter-genre  {
+    height: 25px;
+    width: 150px;
+}
+
+.list-view.active {
+    border:2px solid black;
+}
+
+.card-view.active  {
+    border:2px solid black;
+}
+
+/* GALLERY */
+
+.movie-view {
+    display: flex;
+    align-items: center;
+}
+
+.movie-view > div {
+    margin-right: 10px;
+}
+
+.movie-view img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.movie-gallery {
+    padding-right: 25px;
+    padding-left: 25px;
+    width: 76%;
+}
+
+.movie-item {
+    cursor: pointer;
+}
+
+/* CARD ITEM VIEW */
+
+.movie-list.card {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card .movie-item {
+    position: relative;
+    padding: 15px;
+    margin-bottom: 40px;
+    width: 23%;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #ff5200;
+}
+
+.card .movie-item img {
+    margin-bottom: 10px;
+    width: 180px;
+    height: 150px;
+}
+
+.card .movie-name {
+    margin-bottom: 5px;
+}
+
+.fa-4 {
+    font-size: 3em;
+}
+
+/* LIST ITEM VIEW */
+
+.list .movie-item {
+    position: relative;
+    display: flex;
+    background-color: #ff5200;
+    border-radius: 10px;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.list .movie-block-left {
+    margin-right: 5%;
+}
+
+.list .movie-item img {
+    width: 270px;
+    height: 150px;
+    margin-right:10%;
+}
+
+.list .movie-info {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.list .movie-name {
+    margin-right: 10px;
+}
+
+.list .movie-desc {
+    margin-bottom: 10px;
+    width: 65%;
+}
+
+.list .generes-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.list .genre-item, .modal-left .genre-item {
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #44ec30;
+    width: 19%;
+    margin-right: 2%;
+    margin-bottom: 10px;
+}
+
+.fa-star {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.checked {
+    color: orange;
+}
+
+/* MODAL */
+
+.modal.active{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.modal-content {
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 50%;
+    border-radius: 0.5rem;
+}
+
+.modal-left{
+    width: 39%;
+    margin-right: 5%;
+}
+
+.modal-right {
+    width: 60%;
+}
+
+.modal-content img {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 20px;
+}
+
+.star-year {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.star-year .fa-star {
+    position: relative;
+    top: auto;
+    right: auto;
+}
+
+.modal-left .generes-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal-left .genre-item {
+    width: 48%;
+}
+
+.modal-right h1{
+    margin: 0 0 20px 0;
+}
+
+.modal-right .modal-main-info {
+    height: 300px;
+    margin-bottom: 60px;
+}
+
+.modal-movie-director {
+    margin-bottom: 15px;
+}
+
+.close-button {
+    float: right;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0.25rem;
+}
+
+/* Favourite Movies */
+
+.favourite {
+    width: 19%;
+}
+
+.fav-list {
+    text-align: center;
+}
+
+.fav-item {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.fav-film-name {
+    font-size: 18px;
+    font-weight: bold;
+    width: 92px;
+}
+
+.remove-fav-film {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .card .movie-item {
+        width: 30%;
+    }
+
+    .fa-4 {
+        font-size: 2.5em;
+    }
+
+    .modal-content {
+        width: 85%;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    main {
+        display: block;
+    }
+
+    .movie-gallery {
+        width: 100%;
+    }
+
+    .favourite {
+        width: 100%;
+    }
+
+    .card .movie-item {
+        width: 46%;
+    }
+
+    .list .genre-item, .modal-left .genre-item {
+        width: 36%;
+    }
+
+    .modal-left {
+        width: 73%;
+    }
+
+    .modal-content {
+        padding: 1em;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .list .genre-item, .modal-left .genre-item {
+        width: 46%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    p {
+        font-size: 12px
+    }
+
+    .card .movie-item {
+        width: 85%;
+    }
+}
+
+/* Spinner */
+
+#spinner:not([hidden]) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #spinner::after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    border: 2px solid #f3f3f3;
+    border-top: 3px solid #f25a41;
+    border-radius: 100%;
+    will-change: transform;
+    animation: spin 1s infinite linear
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
