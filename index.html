@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>Movie Gallery</title>
+</head>
+<body>
+<div id="root">
+<main>
+    <div class="movie-gallery">
+        <h1>Movie Gallery</h1>
+        <div class="movie-options">
+            <select class="filter-genre">
+                <option value="all">select genre</option>
+            </select>
+            <div class="movie-view">
+                <div><p>view as:</p></div>
+                <div class="card-view active">
+                    <img src="223e99ec9377b12fffe31bb239baa36c.png" class="card-view-img" alt="">
+                </div>
+                <div class="list-view">
+                    <img src="452e63811839a823f7fa16a07b500d08.png" class="list-view-img" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="movie-list card">
+            <div hidden id="spinner"></div>
+        </div>
+    </div>
+    <div class="favourite">
+        <h1>Favourite List</h1>
+        <div class="fav-list"></div>
+    </div>
+</main>
+<div class="modal">
+
+</div>
+</div>
+<script type="text/javascript" src="main.bundle.js"></script></body>
+</html>
