@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       id = elem.getAttribute("data-id");
       film.getFilm(id);
-    } else {
+    } else if (elem.classList.contains("fa-star")) {
       film.setFavourite(elem);
       // eslint-disable-next-line no-restricted-globals
       location.reload();
@@ -106,10 +106,12 @@ document.addEventListener("DOMContentLoaded", function() {
   /* Remove from favourite list */
 
   favList.addEventListener("click", e => {
-    const elem = e.target.parentNode;
-    const id = elem.getAttribute("data-id");
-    film.removeFromFavouriteList(id);
-    // eslint-disable-next-line no-restricted-globals
-    location.reload();
+    if (e.target.classList.contains("remove-fav-film")) {
+      const elem = e.target.parentNode;
+      const id = elem.getAttribute("data-id");
+      film.removeFromFavouriteList(id);
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }
   });
 });
