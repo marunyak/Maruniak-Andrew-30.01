@@ -14,13 +14,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/marunyak/Maruniak-Andrew-30.01.git"
+    "url": "git+https://github.com/marunyak/Maruniak-Andrew-3.02.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/marunyak/Maruniak-Andrew-30.01/issues"
+    "url": "https://github.com/marunyak/Maruniak-Andrew-3.02/issues"
   },
   "homepage": "https://marunyak.github.io/Maruniak-Andrew-3.02/",
   "devDependencies": {
