@@ -9,7 +9,7 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "fix": "eslint --ext .js src/js/ --fix ;exit 0",
     "lint": "eslint --ext .js src/js/ ;exit 0",
-    "deploy": "gh-pages -d dist",
+    "deploy": "gh-pages -d build",
     "publish-demo": "npm run build && npm run deploy"
   },
   "repository": {
