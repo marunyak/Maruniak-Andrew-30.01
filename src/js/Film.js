@@ -2,7 +2,7 @@ import storage from "./LocalStorage";
 
 class Film {
   constructor() {
-    this.url = "http://my-json-server.typicode.com/moviedb-tech/movies/list/";
+    this.url = "https://my-json-server.typicode.com/moviedb-tech/movies/list/";
     this.filmList = document.querySelector(".movie-list");
     this.modal = document.querySelector(".modal");
     this.selectFilter = document.querySelector(".filter-genre");
