@@ -6,18 +6,23 @@ class Film {
     this.filmList = document.querySelector(".movie-list");
     this.modal = document.querySelector(".modal");
     this.selectFilter = document.querySelector(".filter-genre");
+    this.favourite = document.querySelector(".fav-list");
     this.filter = "";
     this.list = "";
   }
 
-  getFilmList() {
-    fetch(`${this.url}`, {
+  getFetch(id = "") {
+    return fetch(`${this.url}${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
       }
-    })
+    });
+  }
+
+  getFilmList() {
+    this.getFetch()
       .then(res => res.json())
       .then(response => {
         storage.save(response, "FilmList");
@@ -25,6 +30,7 @@ class Film {
         this.getGenres();
         this.renderFilmItems(response, "card");
         this.list = response;
+        this.getFavouriteList();
       })
       .catch(error => {
         console.error(error);
@@ -33,13 +39,7 @@ class Film {
   }
 
   getFilm(id) {
-    fetch(`${this.url}${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
+    this.getFetch(id)
       .then(res => res.json())
       .then(response => {
         this.createFilmModal(response);
@@ -50,10 +50,9 @@ class Film {
       });
   }
 
-  createFilmItem(
-    { id, name, img, description, year, genres, director, starring },
-    type
-  ) {
+  createFilmItem({ id, name, img, description, year, genres }, type) {
+    let favList = storage.get("FavouriteList");
+    favList = !favList.length ? [] : favList;
     let genList = "";
     let film = "";
     if (type === "card") {
@@ -61,6 +60,9 @@ class Film {
                 <img src=${img} alt=""/>
                 <p class="movie-name">${name}</p>
                 <p class="movie-year">${year}</p>
+                <span class="fa fa-star fa-4 ${
+                  favList.indexOf(String(id)) !== -1 ? "checked" : ""
+                }"></span>
             </div>`;
     } else {
       if (genres) {
@@ -82,6 +84,9 @@ class Film {
                ${genList}
             </div>
             </div>
+            <span class="fa fa-star fa-4 ${
+              favList.indexOf(String(id)) !== -1 ? "checked" : ""
+            }"></span>
         </div>`;
     }
     this.filmList.innerHTML += film;
@@ -146,6 +151,8 @@ class Film {
     director,
     starring
   }) {
+    let favList = storage.get("FavouriteList");
+    favList = !favList.length ? [] : favList;
     let genList = "";
     if (genres) {
       genres.forEach(function(item) {
@@ -156,8 +163,10 @@ class Film {
     <div class="modal-content">
         <div class="modal-left">
             <img src=${img} alt="">
-            <div class="star-year">
-                <p>starr</p>
+            <div class="star-year" data-id=${id}>
+                <span class="fa fa-star fa-4 ${
+                  favList.indexOf(String(id)) !== -1 ? "checked" : ""
+                }"></span>
                 <p class="modal-movie-name">${year}</p>
             </div>
             <div class="generes-list">
@@ -182,6 +191,47 @@ class Film {
     </div>`;
     this.modal.classList.add("active");
     this.modal.innerHTML += film;
+  }
+
+  setFavourite(elem) {
+    const favouriteList = storage.get("FavouriteList");
+    const id = elem.parentNode.getAttribute("data-id");
+    const arr = [];
+
+    if (!favouriteList.length) {
+      arr.push(id);
+      storage.save(arr, "FavouriteList");
+    } else if (elem.classList.contains("checked")) {
+      favouriteList.splice(favouriteList.indexOf(id), 1);
+      storage.save(favouriteList, "FavouriteList");
+    } else {
+      favouriteList.push(id);
+      storage.save(favouriteList, "FavouriteList");
+    }
+    elem.classList.toggle("checked");
+  }
+
+  getFavouriteList() {
+    let items = "";
+    const favList = storage.get("FavouriteList");
+    if (favList.length) {
+      favList.forEach(id => {
+        const film = this.list.find(item => item.id === Number(id)).name;
+        items += `<div class="fav-item" data-id=${id}>
+        <p>→</p>
+        <p class="fav-film-name">${film}</p>
+        <p class="remove-fav-film">X</p>
+      </div>`;
+      });
+    }
+    this.favourite.innerHTML += items;
+  }
+
+  removeFromFavouriteList(id) {
+    let list = storage.get("FavouriteList");
+    list = list.filter(item => item !== id);
+    console.log(list);
+    storage.save(list, "FavouriteList");
   }
 }
 

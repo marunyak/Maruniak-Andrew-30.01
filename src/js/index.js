@@ -3,6 +3,9 @@ import Film from "./Film";
 import storage from "./LocalStorage";
 
 const modal = document.querySelector(".modal");
+const movieView = document.querySelector(".movie-view");
+const filterGenre = document.querySelector(".filter-genre");
+const favList = document.querySelector(".fav-list");
 const film = new Film();
 const filmList = storage.get("FilmList");
 let view = "card";
@@ -15,12 +18,13 @@ document.addEventListener("DOMContentLoaded", function() {
   } else {
     film.list = filmList;
     film.getGenres();
+    film.getFavouriteList();
     film.renderFilmItems(filmList, view);
   }
 
   /* Change Film View */
 
-  document.querySelector(".movie-view").onclick = function(e) {
+  movieView.onclick = e => {
     const elemClass = e.target.classList;
     const listView = document.querySelector(".list-view").classList;
     const cardView = document.querySelector(".card-view").classList;
@@ -48,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* Filter Movies */
 
-  document.querySelector(".filter-genre").addEventListener("change", e => {
+  filterGenre.addEventListener("change", e => {
     const val = e.target.value;
     if (val !== "all") {
       film.filterFilmList(val, view);
@@ -58,28 +62,52 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
-  /* Show Modal */
+  /* Show Modal or Add to favourite */
 
   document.querySelector(".movie-list").addEventListener("click", e => {
     let elem = e.target;
-    if (!elem.classList.contains(".movie-list")) {
+    // const elemClass = elem.classList;
+    let id = "";
+
+    if (
+      !elem.classList.contains("movie-list") &&
+      !elem.classList.contains("fa-star")
+    ) {
       while (!elem.classList.contains("movie-item")) {
-        if (elem.classList.contains(".movie-list")) break;
+        if (elem.classList.contains("movie-list")) break;
         else elem = elem.parentNode;
       }
-      const id = elem.getAttribute("data-id");
+      id = elem.getAttribute("data-id");
       film.getFilm(id);
+    } else {
+      film.setFavourite(elem);
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
     }
   });
 
-  /* Close Modal */
+  /* Close Modal or Add to favourite */
 
-  modal.addEventListener("click", function(e) {
+  modal.addEventListener("click", e => {
     const modalCont = document.querySelector(".modal-content");
     const elem = e.target;
     if (elem.classList.contains("close-button")) {
       modal.classList.toggle("active");
       modal.removeChild(modalCont);
+    } else if (elem.classList.contains("fa-star")) {
+      film.setFavourite(elem);
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
     }
+  });
+
+  /* Remove from favourite list */
+
+  favList.addEventListener("click", e => {
+    const elem = e.target.parentNode;
+    const id = elem.getAttribute("data-id");
+    film.removeFromFavouriteList(id);
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
   });
 });
