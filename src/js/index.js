@@ -2,7 +2,9 @@ import "../css/style.css";
 import Film from "./Film";
 import storage from "./LocalStorage";
 
+const spinner = document.getElementById("spinner");
 const modal = document.querySelector(".modal");
+const movieList = document.querySelector(".movie-list");
 const movieView = document.querySelector(".movie-view");
 const filterGenre = document.querySelector(".filter-genre");
 const favList = document.querySelector(".fav-list");
@@ -14,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
   /* Load Movie Gallery */
 
   if (!filmList.length) {
+    spinner.removeAttribute("hidden");
     film.getFilmList();
   } else {
     film.list = filmList;
@@ -28,13 +31,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const elemClass = e.target.classList;
     const listView = document.querySelector(".list-view").classList;
     const cardView = document.querySelector(".card-view").classList;
-    const movieList = document.querySelector(".movie-list").classList;
+    const movieListClass = movieList.classList;
 
     if (!elemClass.contains("active") && elemClass.contains("card-view-img")) {
       view = "card";
       film.filterFilmList("", view);
-      movieList.remove("list");
-      movieList.add("card");
+      movieListClass.remove("list");
+      movieListClass.add("card");
       cardView.toggle("active");
       listView.toggle("active");
     } else if (
@@ -43,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
     ) {
       view = "list";
       film.filterFilmList("", view);
-      movieList.add("list");
-      movieList.remove("card");
+      movieListClass.add("list");
+      movieListClass.remove("card");
       cardView.toggle("active");
       listView.toggle("active");
     }
@@ -64,9 +67,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
   /* Show Modal or Add to favourite */
 
-  document.querySelector(".movie-list").addEventListener("click", e => {
+  movieList.addEventListener("click", e => {
     let elem = e.target;
-    // const elemClass = elem.classList;
     let id = "";
 
     if (

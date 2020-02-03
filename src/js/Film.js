@@ -28,6 +28,7 @@ class Film {
         storage.save(response, "FilmList");
         this.setGenres(response);
         this.getGenres();
+        document.getElementById("spinner").setAttribute("hidden", "");
         this.renderFilmItems(response, "card");
         this.list = response;
         this.getFavouriteList();
@@ -230,7 +231,6 @@ class Film {
   removeFromFavouriteList(id) {
     let list = storage.get("FavouriteList");
     list = list.filter(item => item !== id);
-    console.log(list);
     storage.save(list, "FavouriteList");
   }
 }

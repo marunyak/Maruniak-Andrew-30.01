@@ -62,7 +62,6 @@ select.filter-genre  {
 }
 
 .movie-view img {
-    max-width: 100%;
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -82,26 +81,22 @@ select.filter-genre  {
 
 .movie-list.card {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
 }
 
 .card .movie-item {
     position: relative;
     padding: 15px;
-    margin:0 15px 40px 0;
+    margin-bottom: 40px;
     width: 23%;
     text-align: center;
     border-radius: 10px;
     background-color: #ff5200;
 }
 
-.card .movie-item:nth-child(4n) {
-    margin-right: 0;
-}
-
 .card .movie-item img {
     margin-bottom: 10px;
-    max-width: 100%;
     width: 180px;
     height: 150px;
 }
@@ -131,7 +126,6 @@ select.filter-genre  {
 }
 
 .list .movie-item img {
-    max-width: 100%;
     width: 270px;
     height: 150px;
     margin-right:10%;
@@ -186,10 +180,6 @@ select.filter-genre  {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-    transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s; */
 }
 .modal-content {
     position: absolute;
@@ -287,3 +277,102 @@ select.filter-genre  {
 .remove-fav-film {
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .card .movie-item {
+        width: 30%;
+    }
+
+    .fa-4 {
+        font-size: 2.5em;
+    }
+
+    .modal-content {
+        width: 85%;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    main {
+        display: block;
+    }
+
+    .movie-gallery {
+        width: 100%;
+    }
+
+    .favourite {
+        width: 100%;
+    }
+
+    .card .movie-item {
+        width: 46%;
+    }
+
+    .list .genre-item, .modal-left .genre-item {
+        width: 36%;
+    }
+
+    .modal-left {
+        width: 73%;
+    }
+
+    .modal-content {
+        padding: 1em;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .list .genre-item, .modal-left .genre-item {
+        width: 46%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+
+    p {
+        font-size: 12px
+    }
+
+    .card .movie-item {
+        width: 85%;
+    }
+}
+
+/* Spinner */
+
+#spinner:not([hidden]) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #spinner::after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    border: 2px solid #f3f3f3;
+    border-top: 3px solid #f25a41;
+    border-radius: 100%;
+    will-change: transform;
+    animation: spin 1s infinite linear
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
